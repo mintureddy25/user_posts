@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
 import { UsersModule } from './users/users.module';
+import { Post } from './posts/posts.entity';
+import { PostModule } from './posts/post.module';
 
 
 @Module({
@@ -19,11 +21,12 @@ import { UsersModule } from './users/users.module';
       username: process.env.MYSQL_USERNAME, // Load from .env file
       password: process.env.MYSQL_PASSWORD, // Load from .env file
       database: process.env.MYSQL_DATABASE, // Load from .env file
-      entities: [User], // Add your entities here
+      entities: [User, Post], // Add your entities here
       synchronize: true, // For development, set to false in production
     }),
     UsersModule,
     AuthModule,
+    PostModule
   ],
 })
 export class AppModule {}
