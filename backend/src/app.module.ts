@@ -15,14 +15,14 @@ import { PostModule } from './posts/post.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql', // MySQL as the database type
-      host: process.env.MYSQL_HOST, // Load from .env file
+      type: 'mysql',
+      host: process.env.MYSQL_HOST,
       port: parseInt(process.env.MYSQL_PORT || ''),
-      username: process.env.MYSQL_USERNAME, // Load from .env file
-      password: process.env.MYSQL_PASSWORD, // Load from .env file
-      database: process.env.MYSQL_DATABASE, // Load from .env file
-      entities: [User, Post], // Add your entities here
-      synchronize: true, // For development, set to false in production
+      username: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      entities: [User, Post],
+      synchronize: true, 
     }),
     UsersModule,
     AuthModule,

@@ -1,25 +1,31 @@
-// auth.module.ts
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/auth.gaurd';
 import { PassportModule } from '@nestjs/passport';
-import { ConfigModule } from '@nestjs/config';
-import { GoogleStrategy } from './auth.google.strategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GoogleStrategy } from './passport/auth.google.strategy';
 import { AuthController } from './auth.controller';
+import { UsersModule } from 'src/users/users.module';
+import { FacebookStrategy } from './passport/auth.facebook.strategy';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'google' }), 
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: {
-        expiresIn: process.env.JWT_EXPIRATION_TIME,
-      },
+    PassportModule, 
+    JwtModule.registerAsync({
+      imports: [ConfigModule], 
+      inject: [ConfigService],  
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),  
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRATION_TIME'),  
+        },
+      }),
     }),
-    ConfigModule
+    ConfigModule,
+    UsersModule
   ],
-  providers: [AuthService, GoogleStrategy, JwtAuthGuard],
+  providers: [AuthService, GoogleStrategy, FacebookStrategy,JwtAuthGuard],
   exports: [AuthService],
   controllers: [AuthController]
 })

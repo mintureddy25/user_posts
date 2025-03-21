@@ -1,6 +1,5 @@
-// src/users/user.entity.ts
-
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from 'src/posts/posts.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -15,4 +14,10 @@ export class User {
 
   @Column({ type: 'varchar', length: 255 })
   provider: string;
+
+  @Column({ type: 'text' , default: null})
+  image: string;
+
+  @OneToMany(() => Post, post => post.user)
+  posts: Post[];
 }

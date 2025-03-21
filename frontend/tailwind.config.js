@@ -4,7 +4,12 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},  // You can add any customizations here
+    extend: {
+      fontFamily: {
+        sans: ['Helvetica', 'Arial', 'sans-serif'],
+        mono: ['Menlo', 'Monaco', 'monospace'],
+      },
+    },
   },
-  plugins: [],  // You can add plugins if needed
+  plugins: [],
 }

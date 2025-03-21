@@ -7,8 +7,8 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  async createGoogleJwt(user: any) {
-    const payload = { googleId: user.googleId, name: user.name };
+  async createJwt(user: any) {
+    const payload = { id: user.id, username: user.username };
     return {
       accessToken: this.jwtService.sign(payload),
     };

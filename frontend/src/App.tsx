@@ -1,31 +1,34 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import CallBack from './callback';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from './components/Header';
+import Login from './features/login';
+import CallbackPage from './components/callback';
+import Dashboard from './features/dashboard';
+import Post from './features/post';
+import ProtectedWrapper from './components/protectedWrapper';
+
 
 const App = () => {
-  const googleClientId = '655728226324-bjjbg8josmu14tba9b5bfcck5ilbu7ot.apps.googleusercontent.com'; 
-  // Replace with your actual Google Client ID
-  
-  // Handle redirect to /auth/google
-  const handleRedirect = () => {
-    window.location.href = 'http://localhost:3001/auth/google';
-  };
-
   return (
-    <GoogleOAuthProvider clientId={googleClientId}>
+    <>
+      <ToastContainer autoClose={2000} />
+      
       <Router>
+        {/* Public Routes */}
+        <Header />
         <Routes>
-          {/* Add your Google login route */}
-          <Route path="/" element={<button onClick={handleRedirect}>Go to Google</button>} />
-          
-          {/* Add callback route */}
-          <Route path="/callback" element={<CallBack />} />
-          
-          {/* Add more routes if necessary */}
+        
+          <Route path='/' element={<Login />} />
+          <Route path='/callback' element={<CallbackPage />} />
+          <Route path='/dashboard/:id' element={<Post />} />
         </Routes>
+          <Routes>
+            <Route path='/dashboard' element={<ProtectedWrapper><Dashboard /></ProtectedWrapper>} />
+          </Routes>
       </Router>
-    </GoogleOAuthProvider>
+    </>
   );
 };
 
