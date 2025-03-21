@@ -10,7 +10,7 @@
 
 The database consists of two primary tables:
 
-![Database Diagram](https://i.imgur.com/example-image-url.jpg)
+![Database Diagram](https://toleram.s3.ap-south-1.amazonaws.com/toleram/fdb7d2c0-f79e-43a0-be62-3d9495bcd76b-Screenshot_from_2025-03-21_21-47-34.png)
 *Database diagram showing the relationship between users and posts tables*
 
 ### Users Table:
