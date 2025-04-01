@@ -63,7 +63,7 @@ const getAllPosts = async () => {
 
 const getPresignedUrl = async (imageData: ImageData )=>{
     try{
-        const response = await axios.post('https://app.testingproject.space/media/generate-upload-url',imageData);
+        const response = await api.post('/media/generate-upload-url',imageData);
         return response.data;
     }catch(error){
         throw error;
